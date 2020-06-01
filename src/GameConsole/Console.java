@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Console {
 
-    private TicTacToe t; 
+   // private TicTacToe t;
     private ITicTacToe game;
 
     public Console (ITicTacToe game){
@@ -30,8 +30,11 @@ public class Console {
                 selectOptionTwo();
                 int row;
                 int column;
+                boolean validPos;
+                boolean right;
 
                 do {
+                    right = false;
                     System.out.println("Ingrese Fila");
                     row = teclado.nextInt();
                     System.out.println("Ingrese Columna");
@@ -45,8 +48,14 @@ public class Console {
                             System.exit(0);
                         }
                     }
-
-                } while (!game.markMove(row, column));
+                    validPos = game.markMove(row, column);
+                    if (validPos) {
+                            right = true;
+                             //System.out.println("Ya hay una marca en esa posicion");
+                    } else {
+                        invalidPosition();
+                    }
+                } while (!game.markMove(row, column) && !right);
 
                 drawBoard();
                // t.changePlayer();
@@ -91,6 +100,12 @@ public class Console {
         System.out.println("__________________________________");
         System.out.println("|Bienvenido al Juego Tres En Raya|");
         System.out.println("|Seleccione una Opcion:          |");
+    }
+
+    public void invalidPosition(){
+        System.out.println("Posicion No Valida");
+        System.out.println("---------");
+
     }
 
     public boolean optionNumber(int init, int exit, int option ){

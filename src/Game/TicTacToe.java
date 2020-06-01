@@ -7,6 +7,7 @@ public class TicTacToe implements ITicTacToe {
     private char board [][] = new char[3][3];
     private boolean validCell;
     private char simbolPlayer='X';
+    private char vacio = '_';
     private char J1 = 'X';
     private char J2 = 'O';
 
@@ -27,7 +28,7 @@ public class TicTacToe implements ITicTacToe {
     @Override
     public boolean markMove(int row, int column) {
         if (validatePosition(row,column) ){
-            if (board[row][column] == '_') {
+            if (board[row][column] == vacio) {
                 board[row][column] = simbolPlayer;
                 changePlayer();
                 return true;
@@ -60,11 +61,11 @@ public class TicTacToe implements ITicTacToe {
 
     @Override
     public boolean draw() {
-        boolean empate=false;
+        boolean tie=false;
         if(!checkTicTacToe() && fullBoard() ){
-            empate = true;
+            tie = true;
         }
-        return empate;
+        return tie;
     }
 
     @Override
@@ -108,10 +109,10 @@ public class TicTacToe implements ITicTacToe {
     }
 
     public  boolean validCell(int row, int column) {
-        if (board[row][column] != '_') {
+        if (board[row][column] != vacio) {
             validCell = true;
         }else{
-            if (board[row][column] != 'X' || board[row][column] != 'O'){
+            if (board[row][column] != J1 || board[row][column] != J2){
                 validCell = false;
             }
         }
